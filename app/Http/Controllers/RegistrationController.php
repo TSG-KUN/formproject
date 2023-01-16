@@ -20,13 +20,13 @@ class RegistrationController extends Controller
         $validatedData = $request->validate([
             'username' => ['required','max:64'],
             'email' => ['email:dns','required'],
-            'password' => ['required','min:8'],
+            'password' => ['required','min:5'],
         ]);
         
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         User::create($validatedData);
 
-        return redirect('/login') -> with('success','Registration succesful! Please login!');
+        return redirect('/login');
     }
 }

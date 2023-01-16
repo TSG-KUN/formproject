@@ -16,16 +16,23 @@ class LoginController extends Controller
 
     public function authenticate(Request $request) {
         $credentials = $request -> validate([
-            'email' => 'required|email:dns',
+            'username' => 'required|max:255',
             'password' => 'required'
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request -> session() -> regenerate();
-            return redirect() -> intended('/');
+            $request->session()->regenerate();
+            return redirect()->intended('/form');
         }
 
 
-        return back() -> with('LoginError','Login Failed');
+        return back()->with('LoginError','Login Failed');
+    }
+
+    public function logout() {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();     
+        return redirect('/home');
     }
 }

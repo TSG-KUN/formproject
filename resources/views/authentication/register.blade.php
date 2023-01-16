@@ -1,5 +1,5 @@
 @include('bs.bootstrap')
-<form action="/register" method="POST">
+<form action="/register" method="post">
     @csrf
     <div class="container col-md-4 mt-5 p-2">
         <h2 class="d-flex justify-content-center"> Start Your Day </h2>
@@ -16,7 +16,7 @@
             <input type="password" class="form-control" name="password">
         </div>
         <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary"> Login </button>
+            <button type="submit" class="btn btn-primary"> Register </button>
         </div>
     </div>
 </form>

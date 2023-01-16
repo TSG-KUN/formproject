@@ -15,8 +15,8 @@ use App\Http\Controllers\RegistrationController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('home');
 });
 
 Route::prefix('')->name('.')->middleware('guest')->group(function () {
@@ -28,12 +28,13 @@ Route::prefix('')->name('.')->middleware('guest')->group(function () {
     })->name('register');
 });
 
-Route::get('/login', [LoginController::class, 'login']) -> middleware('guest');
+Route::get('/login', [LoginController::class, 'login'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/register', [RegistrationController::class, 'register']) -> middleware('guest');
+Route::get('/register', [RegistrationController::class, 'register'])->middleware('guest');
 Route::post('/register', [RegistrationController::class, 'store']);
 
 Route::get('/form', function() {
     return view('form.form');
-})->name('form');
+})->name('form')->middleware('auth');
